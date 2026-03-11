@@ -1,0 +1,40 @@
+# ============================================================
+# Suppressions Valgrind pour les leaks connus de readline
+# et de history (GNU Readline / libhistory / ncurses)
+#
+# Utilisation :
+#   valgrind --leak-check=full --show-leak-kinds=all \
+#            --suppressions=readline.supp ./minishell
+# ============================================================
+
+{
+   readline_leak
+   Memcheck:Leak
+   match-leak-kinds: reachable,possible
+   ...
+   obj:*libreadline.so*
+}
+
+{
+   history_leak
+   Memcheck:Leak
+   match-leak-kinds: reachable,possible
+   ...
+   obj:*libhistory.so*
+}
+
+{
+   ncurses_leak
+   Memcheck:Leak
+   match-leak-kinds: reachable,possible
+   ...
+   obj:*libncurses.so*
+}
+
+{
+   ncursesw_leak
+   Memcheck:Leak
+   match-leak-kinds: reachable,possible
+   ...
+   obj:*libncursesw.so*
+}
